@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<title>Universal Streaming Player</title>
+
+<link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css"/>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI,sans-serif;
+}
+
+body{
+background: radial-gradient(circle at top,#020617,#020617,#0f172a);
+color:white;
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:30px;
+}
+
+.container{
+width:1200px;
+max-width:95%;
+}
+
+.header{
+text-align:center;
+margin-bottom:30px;
+}
+
+.header h1{
+font-size:40px;
+font-weight:700;
+letter-spacing:1px;
+background:linear-gradient(90deg,#06b6d4,#3b82f6);
+-webkit-background-clip:text;
+color:transparent;
+}
+
+.header p{
+opacity:.7;
+margin-top:8px;
+}
+
+.searchBar{
+display:flex;
+gap:10px;
+justify-content:center;
+margin-bottom:30px;
+flex-wrap:wrap;
+}
+
+.searchBar input{
+flex:1;
+padding:16px;
+border-radius:12px;
+border:none;
+background:#111827;
+color:white;
+font-size:16px;
+}
+
+.searchBar button{
+padding:16px 25px;
+border:none;
+border-radius:12px;
+background:linear-gradient(135deg,#06b6d4,#3b82f6);
+color:white;
+font-size:16px;
+cursor:pointer;
+transition:.3s;
+}
+
+.searchBar button:hover{
+transform:scale(1.05);
+}
+
+.player-wrapper{
+background:rgba(255,255,255,.03);
+border-radius:18px;
+padding:15px;
+box-shadow:0 20px 60px rgba(0,0,0,.7);
+backdrop-filter:blur(20px);
+}
+
+video,iframe{
+width:100%;
+height:650px;
+border-radius:12px;
+}
+
+.footer{
+margin-top:25px;
+text-align:center;
+opacity:.7;
+font-size:14px;
+}
+
+.creator{
+color:#38bdf8;
+font-weight:600;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header">
+<h1>Universal Streaming Player</h1>
+<p>Play YouTube • MKV • MP4 • WebM • HLS • 4K</p>
+</div>
+
+<div class="searchBar">
+
+<input id="url" placeholder="Paste YouTube / MKV / MP4 / Stream link">
+
+<button onclick="playVideo()">Play</button>
+<button onclick="autoDetect()">Auto Detect</button>
+
+</div>
+
+<div class="player-wrapper">
+
+<video id="videoPlayer" controls playsinline></video>
+
+<div id="youtubeContainer" style="display:none"></div>
+
+</div>
+
+<div class="footer">
+🚀 Created & Developed by <span class="creator">Nitesh Kumar</span>
+</div>
+
+</div>
+
+<script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+<script>
+
+let video = document.getElementById("videoPlayer");
+let youtubeContainer = document.getElementById("youtubeContainer");
+
+let player = new Plyr(video,{
+controls:[
+'play-large','play','progress','current-time',
+'mute','volume','settings','fullscreen'
+]
+});
+
+function playVideo(){
+
+let url=document.getElementById("url").value.trim();
+
+if(url===""){
+alert("Paste video link");
+return;
+}
+
+if(url.includes("youtube.com") || url.includes("youtu.be")){
+playYoutube(url);
+}else{
+playDirect(url);
+}
+
+}
+
+function autoDetect(){
+playVideo();
+}
+
+function playYoutube(url){
+
+video.pause();
+video.style.display="none";
+
+youtubeContainer.style.display="block";
+
+let id = extractYoutubeID(url);
+
+youtubeContainer.innerHTML = `
+<div class="plyr__video-embed" id="ytplayer">
+<iframe
+src="https://www.youtube.com/embed/${id}?playsinline=1"
+allowfullscreen
+allow="autoplay"
+></iframe>
+</div>`;
+
+new Plyr('#ytplayer');
+
+}
+
+function playDirect(url){
+
+youtubeContainer.innerHTML="";
+youtubeContainer.style.display="none";
+
+video.style.display="block";
+
+if(url.includes(".m3u8")){
+
+if(Hls.isSupported()){
+
+const hls=new Hls();
+
+hls.loadSource(url);
+hls.attachMedia(video);
+
+}
+
+}else{
+
+video.src=url;
+
+}
+
+video.play();
+
+}
+
+function extractYoutubeID(url){
+
+let regExp=/((\?v=)|(\.be\/))([^&]+)/;
+
+let match=url.match(regExp);
+
+return match?match[4]:url;
+
+}
+
+</script>
+
+</body>
+</html>
