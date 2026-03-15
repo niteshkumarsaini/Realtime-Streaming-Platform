@@ -110,6 +110,109 @@ color:#38bdf8;
 font-weight:600;
 }
 
+/* ============================= */
+/* Tablet Responsive */
+/* ============================= */
+
+@media (max-width:1024px){
+
+video,iframe{
+height:500px;
+}
+
+.header h1{
+font-size:32px;
+}
+
+}
+
+/* ============================= */
+/* Mobile Responsive */
+/* ============================= */
+
+@media (max-width:768px){
+
+body{
+padding:10px;
+align-items:flex-start;
+}
+
+.container{
+width:100%;
+}
+
+.header h1{
+font-size:26px;
+}
+
+.searchBar{
+flex-direction:column;
+}
+
+.searchBar input{
+width:100%;
+}
+
+.searchBar button{
+width:100%;
+}
+
+video,iframe{
+height:320px;
+}
+
+}
+
+/* ============================= */
+/* Small Mobile */
+/* ============================= */
+
+@media (max-width:480px){
+
+.header h1{
+font-size:22px;
+}
+
+video,iframe{
+height:250px;
+}
+
+}
+
+/* ============================= */
+/* Landscape Fullscreen Mode */
+/* ============================= */
+
+@media (orientation: landscape) and (max-width:900px){
+
+body{
+padding:0;
+}
+
+.container{
+width:100%;
+max-width:100%;
+}
+
+.player-wrapper{
+padding:0;
+border-radius:0;
+}
+
+video,iframe{
+height:100vh;
+width:100vw;
+border-radius:0;
+}
+
+.header,
+.searchBar,
+.footer{
+display:none;
+}
+
+}
+
 </style>
 
 </head>
