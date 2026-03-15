@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Universal Streaming Player</title>
+
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
 <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css"/>
@@ -14,33 +18,36 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Segoe UI,sans-serif;
+font-family:Segoe UI, sans-serif;
 }
 
 body{
-background: radial-gradient(circle at top,#020617,#020617,#0f172a);
+background:#020617;
 color:white;
 min-height:100vh;
 display:flex;
 justify-content:center;
-align-items:center;
-padding:30px;
+align-items:flex-start;
+padding:20px;
 }
+
+/* container */
 
 .container{
 width:1200px;
-max-width:95%;
+max-width:100%;
 }
+
+/* header */
 
 .header{
 text-align:center;
-margin-bottom:30px;
+margin-bottom:25px;
 }
 
 .header h1{
-font-size:40px;
+font-size:36px;
 font-weight:700;
-letter-spacing:1px;
 background:linear-gradient(90deg,#06b6d4,#3b82f6);
 -webkit-background-clip:text;
 color:transparent;
@@ -48,61 +55,74 @@ color:transparent;
 
 .header p{
 opacity:.7;
-margin-top:8px;
+margin-top:6px;
 }
+
+/* search bar */
 
 .searchBar{
 display:flex;
-gap:10px;
-justify-content:center;
-margin-bottom:30px;
-flex-wrap:wrap;
+gap:12px;
+margin-bottom:25px;
 }
 
 .searchBar input{
 flex:1;
-padding:16px;
-border-radius:12px;
+padding:14px;
+border-radius:10px;
 border:none;
 background:#111827;
 color:white;
-font-size:16px;
+font-size:15px;
 }
 
 .searchBar button{
-padding:16px 25px;
+
+padding:14px 22px;
 border:none;
-border-radius:12px;
-background:linear-gradient(135deg,#06b6d4,#3b82f6);
-color:white;
-font-size:16px;
+border-radius:10px;
 cursor:pointer;
-transition:.3s;
+font-size:15px;
+
+background:linear-gradient(135deg,#06b6d4,#3b82f6);
+
+color:white;
+transition:.25s;
+
 }
 
 .searchBar button:hover{
 transform:scale(1.05);
 }
 
+/* player */
+
 .player-wrapper{
-background:rgba(255,255,255,.03);
-border-radius:18px;
-padding:15px;
-box-shadow:0 20px 60px rgba(0,0,0,.7);
-backdrop-filter:blur(20px);
+
+background:#0f172a;
+border-radius:14px;
+padding:12px;
+box-shadow:0 10px 40px rgba(0,0,0,.6);
+
 }
 
 video,iframe{
+
 width:100%;
-height:650px;
-border-radius:12px;
+height:600px;
+border-radius:10px;
+
 }
 
+/* footer */
+
 .footer{
-margin-top:25px;
+
 text-align:center;
-opacity:.7;
+margin-top:20px;
 font-size:14px;
+opacity:.7;
+
 }
 
 .creator{
@@ -110,105 +130,121 @@ color:#38bdf8;
 font-weight:600;
 }
 
-/* ============================= */
-/* Tablet Responsive */
-/* ============================= */
+/* ====================== */
+/* Tablet */
+/* ====================== */
 
 @media (max-width:1024px){
 
+.container{
+width:100%;
+}
+
 video,iframe{
-height:500px;
+height:420px;
 }
 
 .header h1{
-font-size:32px;
+font-size:30px;
 }
 
 }
 
-/* ============================= */
-/* Mobile Responsive */
-/* ============================= */
+/* ====================== */
+/* Mobile */
+/* ====================== */
 
 @media (max-width:768px){
 
 body{
 padding:10px;
-align-items:flex-start;
 }
 
 .container{
 width:100%;
 }
 
+.header{
+margin-bottom:15px;
+}
+
 .header h1{
-font-size:26px;
+font-size:24px;
+}
+
+.header p{
+font-size:14px;
 }
 
 .searchBar{
+
 flex-direction:column;
+
 }
 
 .searchBar input{
+
 width:100%;
+
 }
 
 .searchBar button{
+
 width:100%;
+
 }
 
 video,iframe{
-height:320px;
-}
+
+height:240px;
 
 }
 
-/* ============================= */
+}
+
+/* ====================== */
 /* Small Mobile */
-/* ============================= */
+/* ====================== */
 
 @media (max-width:480px){
 
-.header h1{
-font-size:22px;
-}
-
 video,iframe{
-height:250px;
+height:210px;
 }
 
 }
 
-/* ============================= */
-/* Landscape Fullscreen Mode */
-/* ============================= */
+/* ====================== */
+/* Landscape Mobile */
+/* ====================== */
 
-@media (orientation: landscape) and (max-width:900px){
+@media (orientation:landscape) and (max-width:900px){
 
 body{
 padding:0;
-}
-
-.container{
-width:100%;
-max-width:100%;
-}
-
-.player-wrapper{
-padding:0;
-border-radius:0;
-}
-
-video,iframe{
-height:100vh;
-width:100vw;
-border-radius:0;
 }
 
 .header,
 .searchBar,
 .footer{
 display:none;
+}
+
+.container{
+width:100%;
+}
+
+.player-wrapper{
+border-radius:0;
+padding:0;
+}
+
+video,iframe{
+
+height:100vh;
+width:100vw;
+border-radius:0;
+
 }
 
 }
@@ -222,15 +258,18 @@ display:none;
 <div class="container">
 
 <div class="header">
+
 <h1>Universal Streaming Player</h1>
 <p>Play YouTube • MKV • MP4 • WebM • HLS • 4K</p>
+
 </div>
 
 <div class="searchBar">
 
-<input id="url" placeholder="Paste YouTube / MKV / MP4 / Stream link">
+<input id="url" placeholder="Paste YouTube / MP4 / MKV / Stream link">
 
 <button onclick="playVideo()">Play</button>
+
 <button onclick="autoDetect()">Auto Detect</button>
 
 </div>
@@ -244,7 +283,9 @@ display:none;
 </div>
 
 <div class="footer">
+
 🚀 Created & Developed by <span class="creator">Nitesh Kumar</span>
+
 </div>
 
 </div>
@@ -259,8 +300,14 @@ let youtubeContainer = document.getElementById("youtubeContainer");
 
 let player = new Plyr(video,{
 controls:[
-'play-large','play','progress','current-time',
-'mute','volume','settings','fullscreen'
+'play-large',
+'play',
+'progress',
+'current-time',
+'mute',
+'volume',
+'settings',
+'fullscreen'
 ]
 });
 
@@ -294,7 +341,7 @@ youtubeContainer.style.display="block";
 
 let id = extractYoutubeID(url);
 
-youtubeContainer.innerHTML = `
+youtubeContainer.innerHTML=`
 <div class="plyr__video-embed" id="ytplayer">
 <iframe
 src="https://www.youtube.com/embed/${id}?playsinline=1"
@@ -348,4 +395,5 @@ return match?match[4]:url;
 </script>
 
 </body>
+
 </html>
